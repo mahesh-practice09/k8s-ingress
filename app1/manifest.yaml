@@ -57,7 +57,7 @@ annotations:
 spec:
   ingressClassName: alb
   rules:
-  - hosts:  "app1.daws88s.shop"
+  - host:  "app1.daws88s.shop"
     http:
       paths:
       - path: /app1
