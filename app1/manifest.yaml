@@ -1,0 +1,44 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata: 
+  name: app1
+  labels:
+    project: roboshop 
+    tier: frontend
+    component: app1
+spec:
+  replicas: 2
+  selector:
+    # using this labels replica set selects the pod
+    matchLabels:
+         project: roboshop 
+         tier: frontend
+         component: app1
+  # this is POD Definition ,pod is subset of replicaset
+  template:
+     metadata:
+       labels: 
+          project: roboshop 
+          tier: frontend
+          component: app1 
+     spec:
+       containers:
+         - name: app1
+           #image: nginx 
+           image: mahesh050917/app1:1.0.0
+
+---
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: app1
+spec:
+  selector:
+      project: roboshop 
+      tier: frontend
+      component: app1 
+      
+  ports:
+    - protocol: TCP 
+      port: 80  # Service Port
+      targetPort: 80 # Container Port
